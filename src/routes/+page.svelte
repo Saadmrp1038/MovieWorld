@@ -1,5 +1,5 @@
 <script lang="ts">
-    import toast, {Toaster} from 'svelte-french-toast'
+	import toast, { Toaster } from 'svelte-french-toast';
 
 	let username = '';
 	let password = '';
@@ -10,6 +10,8 @@
 
 		// console.log(data.get('username'));
 		// console.log(data.get('password'));
+		username = '';
+		password = '';
 
 		await fetch('/api/login', {
 			method: 'POST',
@@ -27,28 +29,43 @@
 
 				if (loginStatus) {
 					window.location.href = '/homepage';
+				} else {
+					toast.error('Invalid Credentials !!!');
 				}
-                else{
-                    toast.error('Invalid Credentials !!!')
-                }
 			});
 	}
 
 	// export let data;
 </script>
 
-<Toaster/>
+<body class="bg-slate-600 h-screen">
 
-<h1>Welcome to MovieWorld</h1>
+<Toaster />
 
-<form on:submit|preventDefault={login}>
-	<div>
-		<label for="username">Username</label>
-		<input type="text" name="username" bind:value={username} />
-	</div>
-	<div>
-		<label for="password">Password</label>
-		<input type="password" name="password" bind:value={password} />
-	</div>
-	<button type="submit">Submit</button>
-</form>
+<p class="text-4xl font-bold text-center py-10 text-orange-300">Welcome to MovieWorld</p>
+
+<div class="relative flex flex-col justify-center overflow-hidden">
+    <div class="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-lg">
+        <h1 class="text-3xl font-semibold text-center text-purple-700">DaisyUI</h1>
+        <form class="space-y-4" on:submit|preventDefault={login}>
+            <div>
+                <label class="label">
+                    <span class="text-base label-text">Username</span>
+                </label>
+                <input type="text" name="username" bind:value={username} class="w-full input input-bordered input-primary" />
+            </div>
+            <div>
+                <label class="label">
+                    <span class="text-base label-text">Password</span>
+                </label>
+                <input type="password" name="password" bind:value={password}
+                    class="w-full input input-bordered input-primary" />
+            </div>
+            <div>
+                <button type='submit' class="btn btn-primary">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
