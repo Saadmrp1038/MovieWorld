@@ -46,7 +46,7 @@
 
 <div class="relative flex flex-col justify-center overflow-hidden">
     <div class="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-lg">
-        <h1 class="text-3xl font-semibold text-center text-purple-700">DaisyUI</h1>
+        <h1 class="text-3xl font-semibold text-center text-purple-700">Login</h1>
         <form class="space-y-4" on:submit|preventDefault={login}>
             <div>
                 <label class="label">

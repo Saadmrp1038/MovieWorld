@@ -2,4 +2,4 @@
 
 </script>
 
-<h1>HomePage</h1>
+<body class="bg-[#445471] h-screen"></body>
