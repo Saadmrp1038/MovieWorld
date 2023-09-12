@@ -1,3 +1,4 @@
-import { writable } from "svelte/store";
+import { persisted } from 'svelte-local-storage-store';
 
-export const userProfile = writable({isLoggedIn: false, username: ''})
+export const userProfile = persisted('userProfile',{isLoggedIn: false, username: ''})
+export const userAvatar = persisted('userAvatar',{url: ''})

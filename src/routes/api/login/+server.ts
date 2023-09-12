@@ -1,5 +1,3 @@
-
-
 import type { RequestHandler } from "@sveltejs/kit";
 import { supabase } from "$lib/supabaseClient";
 
@@ -41,6 +39,5 @@ export const POST: RequestHandler = async (event) => {
                 }
             }
         )
-    }
-    
+    }   
 } 

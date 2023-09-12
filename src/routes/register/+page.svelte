@@ -5,46 +5,37 @@
 
 	let username = '';
 	let password = '';
-	let confirmpassword = ' ';
+	let confirmpassword = '';
 
-	async function login(event: Event) {
-		//Auto-Login For Dev-Purposes
-		$userProfile = { isLoggedIn: true, username: username };
-		goto('/main/home');
-		return;
-
+	async function register(event: Event) {
 		const form = event.target as HTMLFormElement;
 		const data = new FormData(form);
 
-		// console.log(data.get('username'));
-		// console.log(data.get('password'));
-
-		await fetch('/api/login', {
-			method: 'POST',
-			body: data
-		})
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error('Network response was not ok');
-				}
-				return response.json(); // Parse the JSON response
-			})
-			.then((data) => {
-				const loginStatus = data.success;
-				console.log('Login Status: ' + loginStatus);
-
-				if (loginStatus) {
-					$userProfile = { isLoggedIn: true, username: username };
-					goto('/main/home');
-				} else {
-					toast.error('Invalid Credentials !!!');
-				}
-			});
+		if (password != confirmpassword) {
+			toast.error("Passwords don't match !!!");
+			return;
+		}
 
 		username = '';
 		password = '';
-	}
+		confirmpassword = '';
 
+		await fetch('/api/register', {
+			method: 'POST',
+			body: data
+		})
+		.then((response) => {
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
+			return response.json(); // Parse the JSON response
+		})
+		.then((data) => {
+            toast.success("Register Successful")
+            goto("/login")
+			return;
+		});
+	}
 </script>
 
 <body class="bg-slate-600 min-h-screen">
@@ -54,8 +45,8 @@
 
 	<div class="relative flex flex-col justify-center overflow-hidden">
 		<div class="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-lg">
-			<h1 class="text-3xl font-semibold text-center text-purple-700">Login</h1>
-			<form class="space-y-4" on:submit|preventDefault={login}>
+			<h1 class="text-3xl font-semibold text-center text-purple-700">Register New Account</h1>
+			<form class="space-y-4" on:submit|preventDefault={register}>
 				<div>
 					<label class="label" for="username">
 						<span class="text-base label-text">Username</span>
@@ -78,15 +69,25 @@
 						class="w-full input input-bordered input-primary"
 					/>
 				</div>
-
-				<div class="flex flex-row justify-center">
-					<button type="submit" class="btn btn-primary">Login</button>
+				<div>
+					<label class="label" for="cconfirmpassword">
+						<span class="text-base label-text">Confirm Password</span>
+					</label>
+					<input
+						type="confirmpassword"
+						name="confirmpassword"
+						bind:value={confirmpassword}
+						class="w-full input input-bordered input-primary"
+					/>
 				</div>
-				<div />
-			</form>
-			<a href="/register">
 				<div class="flex flex-row justify-center">
-					<button class="btn btn-primary">Register New Account</button>
+					<button type="submit" class="btn btn-primary">Register</button>
+				</div>
+				<div/>
+			</form>
+            <a href="/login">
+				<div class="flex flex-row justify-center">
+					<button class="btn btn-primary">Cancel</button>
 				</div>
 			</a>
 		</div>

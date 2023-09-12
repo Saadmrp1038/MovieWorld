@@ -1,14 +1,15 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	$: routeId = $page.route.id;
+	$: routeId = $page.url.pathname;
 </script>
 
-<body class="bg-[#2A2F42] h-screen">
+<body class="bg-[#2A2F42] min-h-screen">
 	<div class="drawer lg:drawer-open">
 		<input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
 		<div class="drawer-content flex flex-col items-center justify-center">
 			<!-- Page content here -->
 			<label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+			<slot />
 		</div>
 		<div class="drawer-side">
 			<label for="my-drawer-2" class="drawer-overlay" />
@@ -48,6 +49,4 @@
 			</ul>
 		</div>
 	</div>
-
-	<slot />
 </body>

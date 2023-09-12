@@ -6,6 +6,6 @@
 	});
 </script>
 
-<body class="bg-[#2A2F42] h-screen">
+<body class="bg-[#2A2F42] min-h-screen">
 
 </body>
