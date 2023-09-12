@@ -4,24 +4,23 @@ import { supabase } from "$lib/supabaseClient";
 //api/get-avatar/POST
 export const POST: RequestHandler = async (event) => {
     const data = await event.request.json()
-    const movieId = data['movieId']
+    const groupId = data['groupId']
 
-    // console.log(movieId)
+    // console.log(groupId)
 
-    let { data: reviewList} = await supabase
-    .from('ReviewTable')
+    let { data: memberList} = await supabase
+    .from('MemberInfo')
     .select('*')
-    .eq('movieId',movieId)
+    .eq('groupId',groupId)
 
-    // console.log(reviewList)
+    // console.log(memberList)
 
     return new Response(
-        JSON.stringify({ success: true , reviewList: reviewList}),
+        JSON.stringify({ success: true , memberList: memberList}),
         {
             headers: {
                 'Content-Type': 'application/json'
             }
         }
-        
     )
 }

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
     import { userProfile ,userAvatar } from '../../../stores';
     let userProfileValue: any;
     let userAvatarValue: any;
@@ -8,6 +9,14 @@
     userAvatar.subscribe(value => {
 		userAvatarValue = value;
 	});
+
+    async function getUserData(){
+
+    }
+
+    onMount(()=>{
+
+    })
 
 </script>
 

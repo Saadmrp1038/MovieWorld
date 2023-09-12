@@ -1,12 +1,17 @@
 <script lang='ts'>
 	import { page } from '$app/stores';  
 	import { goto } from '$app/navigation';
-	import { userProfile } from '../../stores';
+	import { userProfile, userAvatar } from '../../stores';
 	import { onMount } from 'svelte';
 
 	let userProfileValue: any;
 	userProfile.subscribe(value => {
 		userProfileValue = value;
+	});
+
+	let userAvatarValue: any;
+	userAvatar.subscribe(value => {
+		userAvatarValue = value;
 	});
 
 	onMount(()=>{
@@ -15,6 +20,13 @@
 		}
 	})
 	$: routeId = $page.route.id
+
+	function logout(){
+		$userProfile = {isLoggedIn: false, username: ''}
+		$userAvatar = {url: ''}
+		goto('/')
+	}
+
 </script>
 
 <header
@@ -57,8 +69,14 @@
         <div>
            <input class="p-2 rounded-md bg-[#0D0F17] text-[#888CA0] border-2 border-[#888CA0]" type="text" name="searchtext" value="Search Movie">
         </div>
+		<div class='flex flex-col items-center'>
+			<a class="px-3 hover:text-gray-500 text-white dark:hover:text-gray-400" href="/main/user-profile-mine">
+				<img src={userAvatarValue.url} width=50 height=50 alt="" class="rounded-full"/>
+			</a>
+			<a class="px-3 hover:text-gray-500 text-white dark:hover:text-gray-400 my-2" href="/main/user-profile-mine">{userProfileValue.username}</a>
+		</div>
 		<div>
-			<a class="px-3 hover:text-gray-500 text-white dark:hover:text-gray-400" href="/main/user-profile-mine"> User Profile</a>
+			<button class='text-white' on:click={logout}>Log Out</button>
 		</div>
 	</nav>
 </header>

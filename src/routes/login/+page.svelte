@@ -9,9 +9,9 @@
 
 	async function login(event: Event) {
 		//Auto-Login For Dev-Purposes
-		$userProfile = { isLoggedIn: true, username: username };
-		goto('/main/home');
-		return;
+		// $userProfile = { isLoggedIn: true, username: username };
+		// goto('/main/home');
+		// return;
 
 		const form = event.target as HTMLFormElement;
 		const data = new FormData(form);

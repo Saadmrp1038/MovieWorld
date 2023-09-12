@@ -56,6 +56,16 @@
 				</li>
 				{/if}
 
+				{#if routeId == "/main/group/"+groupType+"/"+groupId+"/group-trends"}
+				<li class="p-2  bg-gray-700 rounded-xl">
+					<a class="text-cyan-500" href="/main/group/{groupType}/{groupId}/group-trends">Group Trends</a>
+				</li>
+				{:else}
+				<li class="p-2">
+					<a class="" href="/main/group/{groupType}/{groupId}/group-trends">Group Trends</a>
+				</li>
+				{/if}
+
 				{#if routeId == "/main/group/"+groupType+"/"+groupId+"/group-members"}
 				<li class="p-2  bg-gray-700 rounded-xl">
 					<a class="text-cyan-500" href="/main/group/{groupType}/{groupId}/group-members">Group Members</a>

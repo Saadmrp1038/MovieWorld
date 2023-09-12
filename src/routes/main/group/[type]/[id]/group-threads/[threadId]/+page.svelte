@@ -134,7 +134,7 @@
 				<input type="hidden" name="groupId" value={groupId} />
 				<input type="hidden" name="threadId" value={threadId} />
 				<input type="hidden" name="avatarUrl" value={userAvatarValue.url} />
-				<button type="submit" class="btn btn-accent mx-5"> Sent </button>
+				<button type="submit" class="btn btn-accent mx-5"> Post </button>
 			</div>
 		</form>
 	</div>

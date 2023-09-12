@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { tmdbOptions } from '$lib/tmdbClient';
 	import { onMount } from 'svelte';
-	import { userProfile, userAvatar } from '../../../stores';
+	import { userProfile, userAvatar , movieStore} from '../../../stores';
 	import { goto } from '$app/navigation';
 	let userProfileValue: any;
 	userProfile.subscribe((value) => {
@@ -74,10 +74,10 @@
         const form = event.target as HTMLFormElement;
 		const data = new FormData(form);
 		const movieId = data.get('movieId');
+		const movieName = data.get('movieName');
 
         goto("/main/movie/"+movieId)
     }
-
 </script>
 
 <body class="bg-[#2A2F42] min-h-screen">
@@ -100,6 +100,7 @@
 					<p>{topRatedList[i]['overview']}</p>
 				</div> -->
 			</div>
+			<input type="hidden" name="movieName" value={topRatedList[i]['original_title']}>
             <input type="hidden" name="movieId" value={topRatedList[i]['id']}>
         </button>
         </form>
@@ -124,6 +125,7 @@
 					<p>{popularList[i]['overview']}</p>
 				</div> -->
 			</div>
+			<input type="hidden" name="movieName" value={popularList[i]['original_title']}>
             <input type="hidden" name="movieId" value={popularList[i]['id']}>
         </button>
     </form>
@@ -148,6 +150,7 @@
 					<p>{latestList[i]['overview']}</p>
 				</div> -->
 			</div>
+			<input type="hidden" name="movieName" value={latestList[i]['original_title']}>
             <input type="hidden" name="movieId" value={latestList[i]['id']}>
         </button>
     </form>

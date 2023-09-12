@@ -19,6 +19,7 @@
 	$: routeId = $page.url.pathname;
 	$: movieId = $page.params.movieId;
 
+
 	let rating = 10;
 	let review = '';
 

@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import { userProfile, userAvatar } from '../../../../stores';
 	import { goto } from '$app/navigation';
+
 	let userProfileValue: any;
 	userProfile.subscribe((value) => {
 		userProfileValue = value;
@@ -88,6 +89,7 @@
 	</div>
 
 	{#each { length: len1 } as _, i}
+
 		<div class="flex justify-center relative top-1/3">
 			<!-- This is an example component -->
 			<div

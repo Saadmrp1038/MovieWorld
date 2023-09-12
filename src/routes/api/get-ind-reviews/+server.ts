@@ -1,27 +1,29 @@
 import type { RequestHandler } from "@sveltejs/kit";
 import { supabase } from "$lib/supabaseClient";
 
+
 //api/get-avatar/POST
 export const POST: RequestHandler = async (event) => {
     const data = await event.request.json()
-    const movieId = data['movieId']
+    const username = data['username']
 
-    // console.log(movieId)
+    //console.log(username)
 
-    let { data: reviewList} = await supabase
+    let { data: reviewData} = await supabase
     .from('ReviewTable')
     .select('*')
-    .eq('movieId',movieId)
+    .eq('username',username)
+
+    
 
     // console.log(reviewList)
 
     return new Response(
-        JSON.stringify({ success: true , reviewList: reviewList}),
+        JSON.stringify({ success: true , reviewData: reviewData}),
         {
             headers: {
                 'Content-Type': 'application/json'
             }
         }
-        
     )
 }
