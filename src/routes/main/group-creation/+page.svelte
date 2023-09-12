@@ -2,7 +2,13 @@
 	import { createEventDispatcher } from 'svelte';
 	import toast, { Toaster } from 'svelte-french-toast';
     import { userProfile, userAvatar } from '../../../stores';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
+	
+
 	const dispatch = createEventDispatcher();
+
+	$: routeId = $page.url.pathname;
 
 	let userProfileValue: any;
 	userProfile.subscribe((value) => {
@@ -43,8 +49,10 @@
                 throw new Error('Network response was not ok');
             }
 			toast.success('Group Created Successfully');
+			goto('/main/my-groups');
             return response.json(); // Parse the JSON response
         })
+	
 	}
 
 	function selectType() {

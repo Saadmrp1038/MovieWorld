@@ -42,6 +42,7 @@
                 throw new Error('Network response was not ok');
             }
 			toast.success('Thread Created Successfully');
+            goto('/main/group/'+groupType+'/'+groupId+'/group-threads');
             return response.json(); // Parse the JSON response
         })
 
