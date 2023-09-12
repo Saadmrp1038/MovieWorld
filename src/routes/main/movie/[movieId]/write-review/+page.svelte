@@ -66,7 +66,7 @@
 		<p class="text-3xl text-[#c5c5c5] my-5">Write Review</p>
 		<form on:submit|preventDefault={create} class="space-y-10">
 			<label class="input-group">
-				<span>Star</span>
+				<span>Rating</span>
 				<div class="rating rating-lg rating-half">
 					<input on:click={update0} type="radio" name="rating-10" class="rating-hidden" />
 					<input on:click={update1} type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-1" />

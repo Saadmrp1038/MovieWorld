@@ -27,8 +27,8 @@
 		//console.log(movieData['poster_path']);
 	}
 
-	let reviewList : any
-	let len1 = 0
+	let reviewList: any;
+	let len1 = 0;
 
 	async function getReviews() {
 		await fetch('/api/get-reviews', {
@@ -44,16 +44,16 @@
 				return response.json(); // Parse the JSON response
 			})
 			.then((data) => {
-				reviewList = data.reviewList
-				len1 = Object.keys(reviewList).length 
-				console.log(reviewList)
-				console.log(len1)
+				reviewList = data.reviewList;
+				len1 = Object.keys(reviewList).length;
+				console.log(reviewList);
+				console.log(len1);
 			});
 	}
-	
+
 	onMount(() => {
 		getMovieData();
-		getReviews()
+		getReviews();
 	});
 </script>
 
@@ -86,4 +86,42 @@
 	<div class="flex lfex-col justify-center">
 		<p class="text-3xl text-[#c5c5c5] my-5">Reviews</p>
 	</div>
+
+	{#each { length: len1 } as _, i}
+		<div class="flex justify-center relative top-1/3">
+			<!-- This is an example component -->
+			<div
+				class="relative grid grid-cols-1 gap-4 p-4 mb-8 border border-black rounded-lg shadow-lg w-[800px] bg-[#393d4d]"
+			>
+				<div class="relative flex gap-4">
+					<img
+						src={reviewList[i]['avatarUrl']}
+						class="relative rounded-lg -top-8 -mb-4 bg-white border h-20 w-20"
+						alt=""
+						loading="lazy"
+					/>
+					<div class="flex flex-row place-space-between">
+						<div class="flex flex-col w-full">
+							<div class="flex flex-row justify-between">
+								<p class="relative text-xl whitespace-nowrap truncate overflow-hidden text-white">
+									{reviewList[i]['username']}
+								</p>
+							</div>
+							<p class="text-gray-400 text-sm">
+								{reviewList[i]['created_at'].toString().split('T')[0]}
+							</p>
+						</div>
+						<div>
+							<p class="relative text-xl whitespace-nowrap truncate overflow-hidden text-white">
+								★{reviewList[i]['rating']}
+							</p>
+						</div>
+					</div>
+				</div>
+				<p class="-mt-4 text-white">
+					{reviewList[i]['review']}
+				</p>
+			</div>
+		</div>
+	{/each}
 </body>
